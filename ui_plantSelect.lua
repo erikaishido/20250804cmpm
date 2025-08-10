@@ -1,12 +1,12 @@
-local plantSelect = {}
+local UI_plantSelect = {}
 
 
-plantSelect.table = {
+UI_plantSelect.table = {
     name = "plantSelect",
     isActive = false,
     pageIndex = 1,
-    draw = function() plantSelect.draw() end,
-    onClick = function(x, y) plantSelect.onClick(x, y) end,
+    draw = function() UI_plantSelect.draw() end,
+    onClick = function(x, y) UI_plantSelect.onClick(x, y) end,
 
     x = 800,
     y = 120,
@@ -15,14 +15,14 @@ plantSelect.table = {
 }
 
 
-plantSelect.buttons = {         -- add this to plantSelect.table?
+UI_plantSelect.buttons = {         -- add this to plantSelect.table?
     prev = {                    -- or just keep it as its own thing??
-        func = function() plantSelect.flipPage(-1) end,
+        func = function() UI_plantSelect.flipPage(-1) end,
         text = "<-",
         x = 830, y = 270, w = 30, h = 30
     },
     next = {
-        func = function() plantSelect.flipPage(1) end,
+        func = function() UI_plantSelect.flipPage(1) end,
         text = "->",
         x = 930, y = 270, w = 30, h = 30
     },
@@ -43,12 +43,12 @@ plantSelect.buttons = {         -- add this to plantSelect.table?
 -----------------------------
 -- on-click behaviour
 -----------------------------
-function plantSelect.onClick(x, y)
+function UI_plantSelect.onClick(x, y)
     if global.UIS.plantSelect.isActive == false then
         return
     end
 
-    for i,button in pairs(plantSelect.buttons) do
+    for i,button in pairs(UI_plantSelect.buttons) do
         if input.isMouseWithinRect(x, y, button) == true then
             button.func()
         end
@@ -56,7 +56,7 @@ function plantSelect.onClick(x, y)
 end
 
 
-function plantSelect.flipPage(dir)                      -- called from prev/next buttons
+function UI_plantSelect.flipPage(dir)                      -- called from prev/next buttons
     local page = global.UIS.plantSelect.pageIndex       -- readability
     if page+dir <= 0 or page+dir > #global.ALLPLANTS then
         return
@@ -69,7 +69,7 @@ end
 -----------------------------
 -- draw
 -----------------------------
-function plantSelect.draw()
+function UI_plantSelect.draw()
     if global.UIS.plantSelect.isActive == false then
         return
     end
@@ -79,7 +79,7 @@ function plantSelect.draw()
 
 
     -- draw buttons
-    for i,B in pairs(plantSelect.buttons) do
+    for i,B in pairs(UI_plantSelect.buttons) do
         love.graphics.rectangle("line", (B.x), (B.y), B.w, B.h)
         love.graphics.print(B.text, (B.x + (B.w/3)), (B.y + (B.h/3)))
     end
@@ -91,4 +91,4 @@ function plantSelect.draw()
 end
 
 
-return plantSelect
+return UI_plantSelect

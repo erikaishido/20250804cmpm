@@ -1,10 +1,10 @@
-local resources = {}
+local UI_resources = {}
 
 
-resources.table = {
+UI_resources.table = {
     name = "resources",
     isActive = true,
-    draw = function() resources.draw() end,
+    draw = function() UI_resources.draw() end,
     onClick = function() return end,
 
     x = 800,
@@ -18,7 +18,7 @@ resources.table = {
 -----------------------------
 -- draw
 -----------------------------
-function resources.draw()
+function UI_resources.draw()
     if global.UIS.resources.isActive == false then
         return
     end
@@ -31,4 +31,4 @@ function resources.draw()
 end
 
 
-return resources
+return UI_resources

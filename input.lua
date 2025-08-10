@@ -43,11 +43,11 @@ end
 -- takes any table (T) as an argument
 -- table must have x, y, width, height
 -----------------------------
-function input.isMouseWithinRect(xmouse, ymouse, T)
-    if xmouse < T.x or xmouse > (T.x + T.w) then
+function input.isMouseWithinRect(xMouse, yMouse, T)
+    if xMouse < T.x or xMouse > (T.x + T.w) then
         return false
     end
-    if ymouse < T.y or ymouse > (T.y + T.h) then
+    if yMouse < T.y or yMouse > (T.y + T.h) then
         return false
     end
     return true

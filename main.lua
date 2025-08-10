@@ -6,8 +6,8 @@ plant = require("plant")                    -- all plant stuff
 input = require("input")                    -- reads user input
 event = require("event")                    -- events
 interactable = require("interactable")      -- bed, computer, npc etc.
-resources = require("resources")            -- UI. displays oxygen, water, food
-plantSelect = require("plantSelect")        -- UI. lets you select a seed to plant
+UI_resources = require("ui_resources")            -- UI. displays oxygen, water, food
+UI_plantSelect = require("ui_plantSelect")        -- UI. lets you select a seed to plant
 
 
 -----------------------------
@@ -23,8 +23,8 @@ function love.load()
 
     table.insert(global.INTERACTABLES, interactable.bed)    -- only 1 interactable for now
 
-    global.UIS.resources = resources.table                  -- populate ui tables
-    global.UIS.plantSelect = plantSelect.table
+    global.UIS.resources = UI_resources.table                  -- populate ui tables
+    global.UIS.plantSelect = UI_plantSelect.table
 end
 
 
@@ -32,8 +32,8 @@ end
 -- user input handling
 -----------------------------
 function love.update()
-    local xmouse, ymouse = love.mouse.getPosition()
-    input.update(xmouse, ymouse)
+    local xMouse, yMouse = love.mouse.getPosition()
+    input.update(xMouse, yMouse)
 end
 
 
