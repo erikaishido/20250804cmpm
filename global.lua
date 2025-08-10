@@ -37,13 +37,13 @@ global.WATER = 2000
 global.FOOD = 100
 
 global.O2CSP = 10       -- csp stands for "consumption"
-global.WATERCSP = 10    -- ass naming. rethink
+global.WATERCSP = 10    -- bad naming. rethink?
 global.FOODCSP = 10
 
 
 -----------------------------
 -- list of all plants, used for ui_plantSelect
--- plantC has a keyToPlant converter table
+-- plant.lua has a keyToPlant converter table
 -- i really dont like how all this is organized. rethink
 -----------------------------
 global.ALLPLANTS = {

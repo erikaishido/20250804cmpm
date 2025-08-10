@@ -2,8 +2,7 @@
 -- global modules
 -----------------------------
 global = require("global")                  -- stores all global values
-plant = require("plant")                    -- functions that take plant(table) as arg
-plantC = require("plantC")                  -- plant(table) constructor
+plant = require("plant")                    -- all plant stuff
 input = require("input")                    -- reads user input
 event = require("event")                    -- events
 interactable = require("interactable")      -- bed, computer, npc etc.
@@ -16,11 +15,11 @@ plantSelect = require("plantSelect")        -- UI. lets you select a seed to pla
 -----------------------------
 function love.load()
 
-    plantC.initPlantData()
+    plant.initPlantData()
 
-    global.PLANTS[1] = plantC.new(1, "tomato")              -- populate plants at init
-    global.PLANTS[2] = plantC.new(2, "tomato")
-    global.PLANTS[3] = plantC.new(3, "")
+    global.PLANTS[1] = plant.new(1, "tomato")              -- populate plants at init
+    global.PLANTS[2] = plant.new(2, "tomato")
+    global.PLANTS[3] = plant.new(3, "")
 
     table.insert(global.INTERACTABLES, interactable.bed)    -- only 1 interactable for now
 

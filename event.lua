@@ -54,7 +54,7 @@ end
 
 function event.plantSeed(pageIndex)
     local i = global.SELECTEDPLANT
-    global.PLANTS[i] = plantC.new(i, global.ALLPLANTS[pageIndex])
+    global.PLANTS[i] = plant.new(i, global.ALLPLANTS[pageIndex])
     event.closeUI("plantSelect")
 end
 

@@ -3,7 +3,7 @@ local interactable = {}
 
 interactable.bed = {
     name = "bed",
-    onClick = function() event.startNewDay() end,       -- this seems to work????
+    onClick = function() event.startNewDay() end,
     description = "start new day",
     x = 300,
     y = 100,
@@ -16,7 +16,7 @@ interactable.bed = {
 -- general functions
 -----------------------------
 function interactable.onClick(I)
-    I.onClick()    -- holy shit this actually works
+    I.onClick()
 end
 
 
