@@ -5,7 +5,7 @@ local event = {}
 -- events
 -- anything here can be called from anywhere
 --
--- events are an alternative to directly changing globals??????
+-- events are an alternative to directly changing globals??
 -- ask chris
 -----------------------------
 
@@ -52,10 +52,11 @@ function event.closeUI(U)
 end
 
 
-function event.plantSeed(pageIndex)
+function event.plantSeed()
     local i = global.SELECTEDPLANT
-    global.PLANTS[i] = plant.new(i, global.ALLPLANTS[pageIndex])
-    event.closeUI("plantSelect")
+    local page = global.UIS.PLANTSELECT.pageIndex
+    global.PLANTS[i] = plant.new(i, global.ALLPLANTS[page])
+    event.closeUI("PLANTSELECT")
 end
 
 

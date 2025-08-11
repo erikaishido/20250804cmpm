@@ -11,7 +11,7 @@ UI_resources.table = {
     y = 400,
     w = 0,
     h = 0,
-    ymarg = 30
+    yMarg = 30
 }
 
 
@@ -19,15 +19,15 @@ UI_resources.table = {
 -- draw
 -----------------------------
 function UI_resources.draw()
-    if global.UIS.resources.isActive == false then
+    if global.UIS.RESOURCES.isActive == false then
         return
     end
 
-    R = global.UIS.resources
+    R = global.UIS.RESOURCES
     love.graphics.print("Day " .. global.DAYS, R.x, R.y)
-    love.graphics.print("Oxygen: " .. global.O2, R.x, (R.y + R.ymarg*1))
-    love.graphics.print("Water: " .. global.WATER, R.x, (R.y + R.ymarg*2))
-    love.graphics.print("Food: " .. global.FOOD, R.x, (R.y + R.ymarg*3))
+    love.graphics.print("Oxygen: " .. global.O2, R.x, (R.y + R.yMarg*1))
+    love.graphics.print("Water: " .. global.WATER, R.x, (R.y + R.yMarg*2))
+    love.graphics.print("Food: " .. global.FOOD, R.x, (R.y + R.yMarg*3))
 end
 
 

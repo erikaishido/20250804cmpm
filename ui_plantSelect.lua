@@ -27,13 +27,13 @@ UI_plantSelect.buttons = {         -- add this to plantSelect.table?
         x = 930, y = 270, w = 30, h = 30
     },
     plant = {
-        func = function(pageIndex)
-                event.plantSeed(global.UIS.plantSelect.pageIndex) end,
+        func = function()
+                event.plantSeed() end,
         text = "plant seed",
         x = 860, y = 230, w = 100, h = 30
     },
     close = {
-        func = function() event.closeUI("plantSelect") end,
+        func = function() event.closeUI("PLANTSELECT") end,
         text = "x",
         x = 790, y = 110, w = 30, h = 30
     }
@@ -44,7 +44,7 @@ UI_plantSelect.buttons = {         -- add this to plantSelect.table?
 -- on-click behaviour
 -----------------------------
 function UI_plantSelect.onClick(x, y)
-    if global.UIS.plantSelect.isActive == false then
+    if not global.UIS.PLANTSELECT.isActive then
         return
     end
 
@@ -56,13 +56,13 @@ function UI_plantSelect.onClick(x, y)
 end
 
 
-function UI_plantSelect.flipPage(dir)                      -- called from prev/next buttons
-    local page = global.UIS.plantSelect.pageIndex       -- readability
+function UI_plantSelect.flipPage(dir)                   -- called from prev/next buttons
+    local page = global.UIS.PLANTSELECT.pageIndex       -- readability
     if page+dir <= 0 or page+dir > #global.ALLPLANTS then
         return
     end
 
-    global.UIS.plantSelect.pageIndex = page + dir
+    global.UIS.PLANTSELECT.pageIndex = page + dir
 end
 
 
@@ -70,11 +70,11 @@ end
 -- draw
 -----------------------------
 function UI_plantSelect.draw()
-    if global.UIS.plantSelect.isActive == false then
+    if not global.UIS.PLANTSELECT.isActive then
         return
     end
 
-    local PS = global.UIS.plantSelect
+    local PS = global.UIS.PLANTSELECT
     love.graphics.rectangle("line", PS.x, PS.y, PS.w, PS.h)
 
 

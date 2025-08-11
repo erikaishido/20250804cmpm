@@ -13,8 +13,8 @@ global.PLANTS = {
 }
 global.INTERACTABLES = {}
 global.UIS = {
-    plantSelect = {},
-    resources = {}
+    PLANTSELECT = {},
+    RESOURCES = {}
 }
 
 
@@ -48,6 +48,25 @@ global.FOODCSP = 10
 -----------------------------
 global.ALLPLANTS = {
     "tomato", "lettuce"
+}
+
+
+-----------------------------
+-- ian suggestion:
+-- using integers to record states,
+-- instead of using literal strings
+-----------------------------
+global.PLANTSTATES = {
+    EMPTY = 1,
+    SEEDLING = 2,
+    JUVENILE = 3,
+    MATURE = 4,
+    RIPE = 5
+}
+
+global.HARVESTTYPES = {
+    SINGLE = 1,
+    MULTIPLE = 2
 }
 
 

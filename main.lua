@@ -17,14 +17,14 @@ function love.load()
 
     plant.initPlantData()
 
-    global.PLANTS[1] = plant.new(1, "tomato")              -- populate plants at init
+    global.PLANTS[1] = plant.new(1, "tomato")               -- populate plants at init
     global.PLANTS[2] = plant.new(2, "tomato")
-    global.PLANTS[3] = plant.new(3, "")
+    global.PLANTS[3] = plant.new(3, "")                     -- empty planter (for testing)
 
     table.insert(global.INTERACTABLES, interactable.bed)    -- only 1 interactable for now
 
-    global.UIS.resources = UI_resources.table                  -- populate ui tables
-    global.UIS.plantSelect = UI_plantSelect.table
+    global.UIS.RESOURCES = UI_resources.table               -- populate ui tables
+    global.UIS.PLANTSELECT = UI_plantSelect.table
 end
 
 
