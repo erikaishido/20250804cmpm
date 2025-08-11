@@ -64,7 +64,7 @@ function love.draw()
 
 
     -- debug stuff
-    love.graphics.print(global.debugMsg, 100, 50)
+    love.graphics.print(global.DEBUG_MSG, 100, 50)
     -- plant 1 stats (for debug)
     local i = 1
     for k, v in pairs(global.PLANTS[1]) do

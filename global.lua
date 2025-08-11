@@ -36,13 +36,13 @@ global.O2 = 100
 global.WATER = 2000
 global.FOOD = 100
 
-global.O2_CONSUMPTION = 10
+global.O2_CONSUMPTION = 10          -- consumption per day
 global.WATER_CONSUMPTION = 10
 global.FOOD_CONSUMPTION = 10
 
 
 -----------------------------
--- list of all plants, used for ui_plantSelect
+-- list of all plants, used in ui_plantSelect
 -- plant.lua has a keyToPlant converter table
 -- i really dont like how all this is organized. rethink
 -----------------------------
@@ -53,7 +53,7 @@ global.ALL_PLANTS = {
 
 -----------------------------
 -- ian suggestion:
--- using global vars to record states
+-- using global vars to keep track of states
 -- the integers are just placeholders, not meant to be used
 --
 -- kinda similar to enums??
@@ -77,14 +77,14 @@ global.HARVEST_TYPES = {
 -- other stuff
 -----------------------------
 global.DAYS = 1
-global.SELECTED_PLANT = 0
+global.SELECTED_PLANT = nil
 
 
 
 -----------------------------
 -- debug variables
 -----------------------------
-global.debugMsg = "debug message"
+global.DEBUG_MSG = "debug message"
 
 
 return global

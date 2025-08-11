@@ -19,7 +19,7 @@ function input.mousePressed(x, y)
         if input.isMouseWithinRect(x, y, v) then
             plant.onClick(v)
             global.SELECTED_PLANT = i
-            global.debugMsg = "selected plant: " .. global.SELECTED_PLANT
+            global.DEBUG_MSG = "selected plant: " .. global.SELECTED_PLANT
         end
     end
 

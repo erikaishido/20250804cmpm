@@ -7,23 +7,24 @@ local plant = {}
 -----------------------------
 function plant.new(planterIndex, plantName)
 
-    local T = {}                                       -- make an empty table
+    local P = {}                                       -- make an empty table
     for key, value in pairs(plant.base) do             -- copy base key:value pairs into table
-        T[key] = value
+        P[key] = value
     end
 
-    T.x = global.PLANT_OFFSETS[planterIndex].x          -- override xy depending on index
-    T.y = global.PLANT_OFFSETS[planterIndex].y
+    P.x = global.PLANT_OFFSETS[planterIndex].x         -- override xy based on planterIndex
+    P.y = global.PLANT_OFFSETS[planterIndex].y
 
 
-    if plantName == "" then                       -- RETHINK THIS??????????
-        return T
+    if plantName == "" then                            -- when setting an empty planter.
+        return P                                       -- maybe rethink this 
     end
 
-    T.state = global.PLANT_STATES.SEEDLING             -- set state to SEEDLING
-    T.name = plant.keyToPlant[plantName].name         -- override plant-dependant values
+    P.state = global.PLANT_STATES.SEEDLING             -- set state to SEEDLING
+    P.name = plant.keyToPlant[plantName].name          -- override plant-dependant values
+    P.harvestType = plant.keyToPlant[plantName].harvestType
 
-    return T
+    return P
 end
 
 
@@ -32,7 +33,7 @@ end
 -----------------------------
 function plant.initPlantData()
 
-    plant.base = {             -- base stats for plants
+    plant.base = {              -- base stats for plants
         name = "",              -- any specified stats will override these values
         harvestType = global.HARVEST_TYPES.SINGLE,
         state = global.PLANT_STATES.EMPTY,
@@ -46,7 +47,7 @@ function plant.initPlantData()
         ripeSpr = "res/png/2.png"
     }
 
-    plant.tomato = {           -- specific paramerters for each plant
+    plant.tomato = {            -- specific paramerters for each plant
         name = "Tomato",
         harvestType = global.HARVEST_TYPES.MULTIPLE
     }
@@ -78,7 +79,7 @@ end
 
 
 function plant.water(P)
-    if P.isWatered then         -- plant already watered today
+    if P.isWatered then                 -- plant already watered today
         return
     elseif global.WATER < 10 then       -- you are out of water
         return

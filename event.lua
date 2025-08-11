@@ -20,7 +20,7 @@ function event.startNewDay()
         plant.checkGrowth(v)
     end
 
-    global.debugMsg = "start new day!"
+    global.DEBUG_MSG = "start new day!"
 end
 
 
@@ -53,8 +53,9 @@ end
 
 
 function event.plantSeed()
-    local i = global.SELECTED_PLANT
+    local i = global.SELECTED_PLANT                 -- readability stuff
     local page = global.UIS.PLANT_SELECT.pageIndex
+
     global.PLANTS[i] = plant.new(i, global.ALL_PLANTS[page])
     event.closeUI("PLANT_SELECT")
 end
