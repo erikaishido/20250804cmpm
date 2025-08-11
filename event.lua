@@ -12,9 +12,9 @@ local event = {}
 
 function event.startNewDay()
     global.DAYS = global.DAYS + 1
-    global.O2 = global.O2 - global.O2CSP
-    global.WATER = global.WATER - global.WATERCSP
-    global.FOOD = global.FOOD - global.FOODCSP
+    global.O2 = global.O2 - global.O2_CONSUMPTION
+    global.WATER = global.WATER - global.WATER_CONSUMPTION
+    global.FOOD = global.FOOD - global.FOOD_CONSUMPTION
 
     for i,v in ipairs(global.PLANTS) do
         plant.checkGrowth(v)
@@ -53,10 +53,10 @@ end
 
 
 function event.plantSeed()
-    local i = global.SELECTEDPLANT
-    local page = global.UIS.PLANTSELECT.pageIndex
-    global.PLANTS[i] = plant.new(i, global.ALLPLANTS[page])
-    event.closeUI("PLANTSELECT")
+    local i = global.SELECTED_PLANT
+    local page = global.UIS.PLANT_SELECT.pageIndex
+    global.PLANTS[i] = plant.new(i, global.ALL_PLANTS[page])
+    event.closeUI("PLANT_SELECT")
 end
 
 

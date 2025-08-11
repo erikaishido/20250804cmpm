@@ -24,7 +24,7 @@ function love.load()
     table.insert(global.INTERACTABLES, interactable.bed)    -- only 1 interactable for now
 
     global.UIS.RESOURCES = UI_resources.table               -- populate ui tables
-    global.UIS.PLANTSELECT = UI_plantSelect.table
+    global.UIS.PLANT_SELECT = UI_plantSelect.table
 end
 
 

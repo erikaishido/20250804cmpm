@@ -33,7 +33,7 @@ UI_plantSelect.buttons = {         -- add this to plantSelect.table?
         x = 860, y = 230, w = 100, h = 30
     },
     close = {
-        func = function() event.closeUI("PLANTSELECT") end,
+        func = function() event.closeUI("PLANT_SELECT") end,
         text = "x",
         x = 790, y = 110, w = 30, h = 30
     }
@@ -44,12 +44,12 @@ UI_plantSelect.buttons = {         -- add this to plantSelect.table?
 -- on-click behaviour
 -----------------------------
 function UI_plantSelect.onClick(x, y)
-    if not global.UIS.PLANTSELECT.isActive then
+    if not global.UIS.PLANT_SELECT.isActive then
         return
     end
 
     for i,button in pairs(UI_plantSelect.buttons) do
-        if input.isMouseWithinRect(x, y, button) == true then
+        if input.isMouseWithinRect(x, y, button) then
             button.func()
         end
     end
@@ -57,12 +57,12 @@ end
 
 
 function UI_plantSelect.flipPage(dir)                   -- called from prev/next buttons
-    local page = global.UIS.PLANTSELECT.pageIndex       -- readability
-    if page+dir <= 0 or page+dir > #global.ALLPLANTS then
+    local page = global.UIS.PLANT_SELECT.pageIndex       -- readability
+    if page+dir <= 0 or page+dir > #global.ALL_PLANTS then
         return
     end
 
-    global.UIS.PLANTSELECT.pageIndex = page + dir
+    global.UIS.PLANT_SELECT.pageIndex = page + dir
 end
 
 
@@ -70,11 +70,11 @@ end
 -- draw
 -----------------------------
 function UI_plantSelect.draw()
-    if not global.UIS.PLANTSELECT.isActive then
+    if not global.UIS.PLANT_SELECT.isActive then
         return
     end
 
-    local PS = global.UIS.PLANTSELECT
+    local PS = global.UIS.PLANT_SELECT
     love.graphics.rectangle("line", PS.x, PS.y, PS.w, PS.h)
 
 
@@ -84,9 +84,9 @@ function UI_plantSelect.draw()
         love.graphics.print(B.text, (B.x + (B.w/3)), (B.y + (B.h/3)))
     end
     -- draw page index 
-    love.graphics.print(PS.pageIndex .. "/" .. #global.ALLPLANTS, 880, 275)
+    love.graphics.print(PS.pageIndex .. "/" .. #global.ALL_PLANTS, 880, 275)
     -- draw plant name that you're selecting
-    plantName = global.ALLPLANTS[PS.pageIndex]
+    plantName = global.ALL_PLANTS[PS.pageIndex]
     love.graphics.print(plantName, 880, 170)
 end
 

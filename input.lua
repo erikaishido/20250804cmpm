@@ -16,22 +16,22 @@ function input.mousePressed(x, y)
     -- testing: water plant when clicked
     -- should block this out when plantSelect is active
     for i, v in ipairs(global.PLANTS) do
-        if input.isMouseWithinRect(x, y, v) == true then
+        if input.isMouseWithinRect(x, y, v) then
             plant.onClick(v)
-            global.SELECTEDPLANT = i
-            global.debugMsg = "selected plant: " .. global.SELECTEDPLANT
+            global.SELECTED_PLANT = i
+            global.debugMsg = "selected plant: " .. global.SELECTED_PLANT
         end
     end
 
     -- testing: move to new day when bed is clicked
     for i,v in ipairs(global.INTERACTABLES) do
-        if input.isMouseWithinRect(x, y, v) == true then
+        if input.isMouseWithinRect(x, y, v) then
             interactable.onClick(v)
         end
     end
 
     for i,v in pairs(global.UIS) do
-        if input.isMouseWithinRect(x, y, v) == true then
+        if input.isMouseWithinRect(x, y, v) then
             v.onClick(x, y)
         end
     end

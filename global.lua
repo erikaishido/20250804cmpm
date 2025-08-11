@@ -13,7 +13,7 @@ global.PLANTS = {
 }
 global.INTERACTABLES = {}
 global.UIS = {
-    PLANTSELECT = {},
+    PLANT_SELECT = {},
     RESOURCES = {}
 }
 
@@ -22,7 +22,7 @@ global.UIS = {
 -- positional offsets for all plants
 -- dictates x and y
 -----------------------------
-global.PLANTOFFSETS = {
+global.PLANT_OFFSETS = {
     {x= 200, y=300},             -- position for plant 1
     {x= 400, y=300},             -- position for plant 2
     {x= 600, y=300}               -- and so on..
@@ -36,9 +36,9 @@ global.O2 = 100
 global.WATER = 2000
 global.FOOD = 100
 
-global.O2CSP = 10       -- csp stands for "consumption"
-global.WATERCSP = 10    -- bad naming. rethink?
-global.FOODCSP = 10
+global.O2_CONSUMPTION = 10
+global.WATER_CONSUMPTION = 10
+global.FOOD_CONSUMPTION = 10
 
 
 -----------------------------
@@ -46,17 +46,20 @@ global.FOODCSP = 10
 -- plant.lua has a keyToPlant converter table
 -- i really dont like how all this is organized. rethink
 -----------------------------
-global.ALLPLANTS = {
+global.ALL_PLANTS = {
     "tomato", "lettuce"
 }
 
 
 -----------------------------
 -- ian suggestion:
--- using integers to record states,
--- instead of using literal strings
+-- using global vars to record states
+-- the integers are just placeholders, not meant to be used
+--
+-- kinda similar to enums??
+-- ensuring a state can only be one of x types
 -----------------------------
-global.PLANTSTATES = {
+global.PLANT_STATES = {
     EMPTY = 1,
     SEEDLING = 2,
     JUVENILE = 3,
@@ -64,7 +67,7 @@ global.PLANTSTATES = {
     RIPE = 5
 }
 
-global.HARVESTTYPES = {
+global.HARVEST_TYPES = {
     SINGLE = 1,
     MULTIPLE = 2
 }
@@ -74,7 +77,7 @@ global.HARVESTTYPES = {
 -- other stuff
 -----------------------------
 global.DAYS = 1
-global.SELECTEDPLANT = 0
+global.SELECTED_PLANT = 0
 
 
 

@@ -19,7 +19,7 @@ UI_resources.table = {
 -- draw
 -----------------------------
 function UI_resources.draw()
-    if global.UIS.RESOURCES.isActive == false then
+    if not global.UIS.RESOURCES.isActive then
         return
     end
 
