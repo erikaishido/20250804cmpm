@@ -2,6 +2,7 @@ local textureAtlas = {}
 
 -----------------------------
 -- returns a quad at given row/col position
+-- update: are row/col reversed??????
 --
 -- takes any table (T) as an argument
 -- table must contain atlas, width, height

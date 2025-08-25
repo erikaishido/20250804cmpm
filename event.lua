@@ -20,7 +20,9 @@ function event.startNewDay()
         plant.checkGrowth(v)
     end
 
-    global.DEBUG_MSG = "start new day!"
+    if global.DAYS >= 20 then
+        global.DEBUG_MSG = "you survived for 20 days!"
+    end
 end
 
 

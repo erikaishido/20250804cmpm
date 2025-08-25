@@ -5,10 +5,10 @@ interactable.bed = {
     name = "bed",
     onClick = function() event.startNewDay() end,
     description = "new day",
-    x = 95,
+    x = 107,
     y = 84,
-    w = 60,
-    h = 17
+    w = 40,
+    h = 15
 }
 
 

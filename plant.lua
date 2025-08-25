@@ -84,7 +84,7 @@ function plant.initPlantData()
     }
     plant.lettuce = {
         name = "Lettuce",
-        spr = love.graphics.newImage("res/png/tomato.png"),
+        spr = love.graphics.newImage("res/png/lettuce.png"),
         harvestType = global.HARVEST_TYPES.SINGLE
     }
 
@@ -131,9 +131,17 @@ end
 
 
 function plant.harvest(P)
-    P.state = global.PLANT_STATES.EMPTY
-    P.waterCount = 0
+
     event.sumResource("food", 30)
+
+    if P.harvestType == global.HARVEST_TYPES.MULTIPLE then
+        P.state = global.PLANT_STATES.MATURE
+        P.waterCount = 2
+    elseif P.harvestType == global.HARVEST_TYPES.SINGLE then
+        P.state = global.PLANT_STATES.EMPTY
+        P.waterCount = 0
+    end
+
 end
 
 
@@ -155,11 +163,11 @@ function plant.checkGrowth(P)
             P.state = global.PLANT_STATES.JUVENILE
         end
     elseif P.state == global.PLANT_STATES.JUVENILE then
-        if P.waterCount >= 2 then
+        if P.waterCount >= 3 then
             P.state = global.PLANT_STATES.MATURE
         end
     elseif P.state == global.PLANT_STATES.MATURE then
-        if P.waterCount >= 2 then
+        if P.waterCount >= 5 then
             P.state = global.PLANT_STATES.RIPE
         end
     end

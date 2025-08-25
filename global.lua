@@ -46,8 +46,8 @@ function global.load()
     -----------------------------
     -- resources to manage
     -----------------------------
-    global.O2 = 100
-    global.WATER = 2000
+    global.O2 = 300
+    global.WATER = 500
     global.FOOD = 100
 
     global.O2_CONSUMPTION = 10          -- consumption per day
@@ -115,7 +115,7 @@ function global.load()
     -----------------------------
     -- debug variables
     -----------------------------
-    global.DEBUG_MSG = "debug message"
+    global.DEBUG_MSG = ""
 
 
 end
