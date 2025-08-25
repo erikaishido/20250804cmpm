@@ -1,43 +1,58 @@
 local UI_plantSelect = {}
 
 
-UI_plantSelect.table = {
-    name = "plantSelect",
-    isActive = false,
-    pageIndex = 1,
-    draw = function() UI_plantSelect.draw() end,
-    onClick = function(x, y) UI_plantSelect.onClick(x, y) end,
+-----------------------------
+-- load (initialize?) variables
+-----------------------------
 
-    x = 800,
-    y = 120,
-    w = 200,
-    h = 200
-}
+function UI_plantSelect.load()
 
+    UI_plantSelect.table = {
+        name = "plantSelect",
+        isActive = false,
+        pageIndex = 1,
+        baseSpr = love.graphics.newImage("res/png/ui_psBox.png"),
+        iconSpr = love.graphics.newImage("res/png/ui_icons.png"),
+        draw = function() UI_plantSelect.draw() end,
+        onClick = function(x, y) UI_plantSelect.onClick(x, y) end,
 
-UI_plantSelect.buttons = {         -- add this to plantSelect.table?
-    prev = {                    -- or just keep it as its own thing??
-        func = function() UI_plantSelect.flipPage(-1) end,
-        text = "<-",
-        x = 830, y = 270, w = 30, h = 30
-    },
-    next = {
-        func = function() UI_plantSelect.flipPage(1) end,
-        text = "->",
-        x = 930, y = 270, w = 30, h = 30
-    },
-    plant = {
-        func = function()
-                event.plantSeed() end,
-        text = "plant seed",
-        x = 860, y = 230, w = 100, h = 30
-    },
-    close = {
-        func = function() event.closeUI("PLANT_SELECT") end,
-        text = "x",
-        x = 790, y = 110, w = 30, h = 30
+        x = 167,
+        y = 15,
+        w = 64,
+        h = 80
     }
-}
+
+
+    UI_plantSelect.buttons = {         -- add this to plantSelect.table?
+        prev = {                    -- or just keep it as its own thing??
+            func = function() UI_plantSelect.flipPage(-1) end,
+            text = "<-",
+            x = 177, y = 80, w = 11, h = 11,
+            quad = textureAtlas.getQuad(UI_plantSelect.table.iconSpr, 16, 16, 2, 1)
+        },
+        next = {
+            func = function() UI_plantSelect.flipPage(1) end,
+            text = "->",
+            x = 213, y = 80, w = 11, h = 11,
+            quad = textureAtlas.getQuad(UI_plantSelect.table.iconSpr, 16, 16, 2, 1),
+            isFlipped = true
+        },
+        plant = {
+            func = function() event.plantSeed() end,
+            text = "plant seed",
+            x = 185, y = 66, w = 32, h = 13,
+            --quad = textureAtlas.getQuad(UI_plantSelect.table.iconSpr, 16, 16, 3, 1)
+            quad = textureAtlas.getIrregularQuad(UI_plantSelect.table.iconSpr, 32, 0, 32, 16)
+        },
+        close = {
+            func = function() event.closeUI("PLANT_SELECT") end,
+            text = "x",
+            x = 167, y = 15, w = 11, h = 11,
+            quad = textureAtlas.getQuad(UI_plantSelect.table.iconSpr, 16, 16, 1, 1)
+        }
+    }
+
+end
 
 
 -----------------------------
@@ -75,19 +90,22 @@ function UI_plantSelect.draw()
     end
 
     local PS = global.UIS.PLANT_SELECT
-    love.graphics.rectangle("line", PS.x, PS.y, PS.w, PS.h)
+    --love.graphics.rectangle("line", PS.x, PS.y, PS.w, PS.h)
+    love.graphics.draw(PS.baseSpr, PS.x, PS.y)
 
 
     -- draw buttons
     for i,B in pairs(UI_plantSelect.buttons) do
-        love.graphics.rectangle("line", (B.x), (B.y), B.w, B.h)
-        love.graphics.print(B.text, (B.x + (B.w/3)), (B.y + (B.h/3)))
+        love.graphics.draw(PS.iconSpr, B.quad, B.x, B.y)
     end
-    -- draw page index 
-    love.graphics.print(PS.pageIndex .. "/" .. #global.ALL_PLANTS, 880, 275)
+
+    love.graphics.setColor(global.UI_COLOR)
+    -- draw page index
+    love.graphics.print(PS.pageIndex .. "/" .. #global.ALL_PLANTS, 194, 83)
     -- draw plant name that you're selecting
     plantName = global.ALL_PLANTS[PS.pageIndex]
-    love.graphics.print(plantName, 880, 170)
+    love.graphics.print(plantName, 187, 26)
+    love.graphics.setColor(1, 1, 1)
 end
 
 

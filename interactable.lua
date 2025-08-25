@@ -4,11 +4,11 @@ local interactable = {}
 interactable.bed = {
     name = "bed",
     onClick = function() event.startNewDay() end,
-    description = "start new day",
-    x = 300,
-    y = 100,
-    w = 150,
-    h = 80
+    description = "new day",
+    x = 95,
+    y = 84,
+    w = 60,
+    h = 17
 }
 
 
@@ -22,7 +22,7 @@ end
 
 function interactable.draw(I)
     love.graphics.rectangle("line", I.x, I.y, I.w, I.h)
-    love.graphics.print(I.description, I.x+30, I.y+20)
+    love.graphics.print(I.description, I.x+3, I.y+3)
 end
 
 

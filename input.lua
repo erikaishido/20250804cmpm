@@ -5,9 +5,10 @@ local input = {}
 -- loops through every "object" (which are just tables),
 -- to see whether it was clicked/hovered
 -----------------------------
-
-
 function input.update(x, y)
+    for i, P in ipairs(global.PLANTS) do                        -- this feels terribly optimized
+        plant.checkForHover(P, input.isMouseWithinRect(x, y, P))    -- rethink
+    end
 end
 
 
@@ -44,10 +45,12 @@ end
 -- table must have x, y, width, height
 -----------------------------
 function input.isMouseWithinRect(xMouse, yMouse, T)
-    if xMouse < T.x or xMouse > (T.x + T.w) then
+    S = global.SCALE
+
+    if xMouse < T.x*S or xMouse > (T.x + T.w)*S then
         return false
     end
-    if yMouse < T.y or yMouse > (T.y + T.h) then
+    if yMouse < T.y*S or yMouse > (T.y + T.h)*S then
         return false
     end
     return true

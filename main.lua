@@ -6,6 +6,7 @@ plant = require("plant")                    -- all plant stuff
 input = require("input")                    -- reads user input
 event = require("event")                    -- events
 interactable = require("interactable")      -- bed, computer, npc etc.
+textureAtlas = require("textureAtlas")      -- for making sprite quads
 UI_resources = require("ui_resources")            -- UI. displays oxygen, water, food
 UI_plantSelect = require("ui_plantSelect")        -- UI. lets you select a seed to plant
 
@@ -15,6 +16,10 @@ UI_plantSelect = require("ui_plantSelect")        -- UI. lets you select a seed 
 -----------------------------
 function love.load()
 
+    love.graphics.setDefaultFilter("nearest", "nearest")
+
+    global.load()
+    UI_plantSelect.load()
     plant.initPlantData()
 
     global.PLANTS[1] = plant.new(1, "tomato")               -- populate plants at init
@@ -25,6 +30,9 @@ function love.load()
 
     global.UIS.RESOURCES = UI_resources.table               -- populate ui tables
     global.UIS.PLANT_SELECT = UI_plantSelect.table
+
+    love.graphics.setBackgroundColor(global.BG_COLOR)       -- set random sprite stuff
+    love.graphics.setFont(global.FONT1)
 end
 
 
@@ -34,6 +42,7 @@ end
 function love.update()
     local xMouse, yMouse = love.mouse.getPosition()
     input.update(xMouse, yMouse)
+    --global.DEBUG_MSG = xMouse .. ", " .. yMouse
 end
 
 
@@ -50,6 +59,10 @@ end
 -----------------------------
 function love.draw()
 
+    love.graphics.scale(global.SCALE)       -- not sure if this is the right place
+
+    love.graphics.draw(global.BG_SPRITE, 55, 20)
+
     for i,v in ipairs(global.PLANTS) do
         plant.draw(v)
     end
@@ -64,13 +77,13 @@ function love.draw()
 
 
     -- debug stuff
-    love.graphics.print(global.DEBUG_MSG, 100, 50)
+    love.graphics.print(global.DEBUG_MSG, 10, 132)
     -- plant 1 stats (for debug)
-    local i = 1
+--[[     local i = 1
     for k, v in pairs(global.PLANTS[1]) do
         love.graphics.print(k .. ": " .. tostring(v), 40, 100+i)
         i = i + 30
-    end
+    end ]]
 
 
 end
