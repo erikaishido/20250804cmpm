@@ -8,7 +8,7 @@ interactable.bed = {
     x = 107,
     y = 84,
     w = 40,
-    h = 15
+    h = 13
 }
 
 

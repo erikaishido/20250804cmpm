@@ -61,7 +61,7 @@ function global.load()
     -- i really dont like how all this is organized. rethink
     -----------------------------
     global.ALL_PLANTS = {
-        "tomato", "lettuce"
+        "tomato", "lettuce", "bokChoy"
     }
 
 
@@ -83,7 +83,8 @@ function global.load()
 
     global.HARVEST_TYPES = {
         SINGLE = 1,
-        MULTIPLE = 2
+        MULTIPLE = 2,
+        COME_AGAIN = 3
     }
 
 

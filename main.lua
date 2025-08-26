@@ -9,6 +9,7 @@ interactable = require("interactable")      -- bed, computer, npc etc.
 textureAtlas = require("textureAtlas")      -- for making sprite quads
 UI_resources = require("ui_resources")            -- UI. displays oxygen, water, food
 UI_plantSelect = require("ui_plantSelect")        -- UI. lets you select a seed to plant
+util = require("util")
 
 
 -----------------------------
@@ -23,7 +24,7 @@ function love.load()
     plant.initPlantData()
 
     global.PLANTS[1] = plant.new(1, "tomato")               -- populate plants at init
-    global.PLANTS[2] = plant.new(2, "tomato")
+    global.PLANTS[2] = plant.new(2, "lettuce")
     global.PLANTS[3] = plant.new(3, "")                     -- empty planter (for testing)
 
     table.insert(global.INTERACTABLES, interactable.bed)    -- only 1 interactable for now
@@ -33,6 +34,8 @@ function love.load()
 
     love.graphics.setBackgroundColor(global.BG_COLOR)       -- set random sprite stuff
     love.graphics.setFont(global.FONT1)
+
+    global.DEBUG_MSG = "objective: live for 20 days"
 end
 
 
@@ -77,7 +80,7 @@ function love.draw()
 
 
     -- debug stuff
-    love.graphics.print(global.DEBUG_MSG, 10, 132)
+    love.graphics.print(global.DEBUG_MSG, 10, 128)
     -- plant 1 stats (for debug)
 --[[     local i = 1
     for k, v in pairs(global.PLANTS[1]) do

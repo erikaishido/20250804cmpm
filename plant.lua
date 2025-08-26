@@ -27,6 +27,7 @@ function plant.new(planterIndex, plantName)
     P.state = global.PLANT_STATES.SEEDLING             -- set state to SEEDLING
     P.name = plant.keyToPlant[plantName].name          -- override plant-dependant values
     P.harvestType = plant.keyToPlant[plantName].harvestType
+    P.growthCurve = plant.keyToPlant[plantName].growthCurve
 
     P.spr = plant.keyToPlant[plantName].spr
     P.seedlingSpr = {}
@@ -41,8 +42,6 @@ function plant.new(planterIndex, plantName)
     P.ripeSpr = {}
     table.insert(P.ripeSpr, textureAtlas.getQuad(P.spr, 32, 32, 4, 1))
     table.insert(P.ripeSpr, textureAtlas.getQuad(P.spr, 32, 32, 4, 2))
-
-
 
     return P
 end
@@ -59,15 +58,16 @@ function plant.initPlantData()
         spr = "",
         harvestType = global.HARVEST_TYPES.SINGLE,
         state = global.PLANT_STATES.EMPTY,
+        foodValue = 0,
         waterCount = 0,
+        harvestCount = 0,
+        growthCurve = {1, 2, 3},
         isWatered = false,
         isHovered = false,
         x = 0,
         y = 0,
         w = 32,                -- w/h are same across all plants
         h = 25,
-        baseSpr = "res/png/1.png",
-        --ripeSpr = "res/png/2.png",
         baseQuad = "",
         baseHoverQuad = "",
 
@@ -78,19 +78,31 @@ function plant.initPlantData()
     }
 
     plant.tomato = {            -- specific paramerters for each plant
-        name = "Tomato",
+        name = "tomato",
+        flavor = "takes a long time to grow, \nbut continuously produces tomatoes",
         spr = love.graphics.newImage("res/png/tomato.png"),
-        harvestType = global.HARVEST_TYPES.MULTIPLE
+        harvestType = global.HARVEST_TYPES.MULTIPLE,
+        growthCurve = {1, 2, 5}
     }
     plant.lettuce = {
-        name = "Lettuce",
+        name = "lettuce",
+        flavor = "grows rapidly, \nbut can only be harvested once.",
         spr = love.graphics.newImage("res/png/lettuce.png"),
-        harvestType = global.HARVEST_TYPES.SINGLE
+        harvestType = global.HARVEST_TYPES.SINGLE,
+        growthCurve = {1, 2, 3}
+    }
+    plant.bokChoy = {
+        name = "bok choy",
+        flavor = "can be harvested multiple times, \nbut produces less with each harvest.",
+        spr = love.graphics.newImage("res/png/lettuce.png"),
+        harvestType = global.HARVEST_TYPES.COME_AGAIN,
+        growthCurve = {1, 2, 3}
     }
 
     plant.keyToPlant = {           -- long list of all plants
         tomato = plant.tomato,     -- move all this to global?? consider
-        lettuce = plant.lettuce
+        lettuce = plant.lettuce,
+        bokChoy = plant.bokChoy
     }
 
 end
@@ -139,7 +151,11 @@ function plant.harvest(P)
         P.waterCount = 2
     elseif P.harvestType == global.HARVEST_TYPES.SINGLE then
         P.state = global.PLANT_STATES.EMPTY
-        P.waterCount = 0
+        P.waterCount = P.growthCurve[1]
+    elseif P.harvestType == global.HARVEST_TYPES.COME_AGAIN then
+        P.state = global.PLANT_STATES.JUVENILE
+        P.waterCount = P.growthCurve[2]
+        
     end
 
 end
@@ -159,15 +175,15 @@ function plant.checkGrowth(P)
     P.waterCount = P.waterCount + 1
     -- the unholy if else train
     if P.state == global.PLANT_STATES.SEEDLING then
-        if P.waterCount >= 1 then
+        if P.waterCount >= P.growthCurve[1] then
             P.state = global.PLANT_STATES.JUVENILE
         end
     elseif P.state == global.PLANT_STATES.JUVENILE then
-        if P.waterCount >= 3 then
+        if P.waterCount >= P.growthCurve[2] then
             P.state = global.PLANT_STATES.MATURE
         end
     elseif P.state == global.PLANT_STATES.MATURE then
-        if P.waterCount >= 5 then
+        if P.waterCount >= P.growthCurve[3] then
             P.state = global.PLANT_STATES.RIPE
         end
     end
@@ -182,13 +198,7 @@ end
 
 function plant.draw(P)
 
---[[     if P.state == global.PLANT_STATES.EMPTY then
-        love.graphics.rectangle("line", P.x, P.y, P.w, P.h)
-        love.graphics.print("empty planter", P.x+30, P.y+50)
-        return
-    end ]]
-
-    if P.isHovered then                                 -- draw outlined plant
+    if P.isHovered then                                 -- draw outlined plant (rethink)
         if P.state == global.PLANT_STATES.SEEDLING then
             love.graphics.draw(P.spr, P.seedlingSpr[2], P.x+2, P.y-20)
         elseif P.state == global.PLANT_STATES.JUVENILE then
@@ -208,7 +218,7 @@ function plant.draw(P)
     end
 
 
-    if P.state == global.PLANT_STATES.SEEDLING then
+    if P.state == global.PLANT_STATES.SEEDLING then     -- draw actual plant (rethink)
         love.graphics.draw(P.spr, P.seedlingSpr[1], P.x+2, P.y-20)
     elseif P.state == global.PLANT_STATES.JUVENILE then
         love.graphics.draw(P.spr, P.juvenileSpr[1], P.x+2, P.y-20)

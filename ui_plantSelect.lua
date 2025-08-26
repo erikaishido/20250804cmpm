@@ -102,9 +102,14 @@ function UI_plantSelect.draw()
     love.graphics.setColor(global.UI_COLOR)
     -- draw page index
     love.graphics.print(PS.pageIndex .. "/" .. #global.ALL_PLANTS, 194, 83)
-    -- draw plant name that you're selecting
-    plantName = global.ALL_PLANTS[PS.pageIndex]
-    love.graphics.print(plantName, 187, 26)
+
+
+    plantName = global.ALL_PLANTS[PS.pageIndex]     -- readability (rethink design)
+    P = plant.keyToPlant[plantName]
+
+    love.graphics.print(P.name, 187, 26)         -- draw plant info
+    love.graphics.print(P.flavor, 160, 33)
+    love.graphics.print("harvest in: " .. util.sumTable(P.growthCurve) .. " days")
     love.graphics.setColor(1, 1, 1)
 end
 

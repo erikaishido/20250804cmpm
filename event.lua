@@ -20,7 +20,13 @@ function event.startNewDay()
         plant.checkGrowth(v)
     end
 
-    if global.DAYS >= 20 then
+    global.DEBUG_MSG = ""
+
+    if global.FOOD <= 0 or global.O2 <= 0 or global.WATER <= 0 then
+        global.DEBUG_MSG = "rip you ran out of resources"
+    end
+
+    if global.DAYS == 20 then
         global.DEBUG_MSG = "you survived for 20 days!"
     end
 end
